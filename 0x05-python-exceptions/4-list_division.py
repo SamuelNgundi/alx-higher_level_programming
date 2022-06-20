@@ -5,7 +5,7 @@ def list_division(my_list_1, my_list_2, list_length):
         res = 0
         try:
             a, b = (my_list_1[i], my_list_2[i])
-            res = a /b
+            res = a / b
         except TypeError:
             print("wrong type")
         except ZeroDivisionError:
