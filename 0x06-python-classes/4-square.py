@@ -6,7 +6,7 @@ class Square:
     """Represents a square"""
     def __init__(self, size=0):
         """Inithializes the attributes"""
-        if type(size) is not int:
+        if type(size) != int:
             raise TypeError('size must be an integer')
         elif size < 0:
             raise ValueError('size must be >= 0')
@@ -19,7 +19,7 @@ class Square:
 
     @size.setter
     def size(self, value):
-        if type(value) is not int:
+        if type(value) != int:
             raise TypeError('size must be an integer')
         elif size < 0:
             raise ValueError('size must be >= 0')
