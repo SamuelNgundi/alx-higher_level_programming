@@ -1,4 +1,7 @@
 #!/usr/bin/python3
+"""Square that defines a square"""
+
+
 class Square:
     """Checks for TypeError and ValueError
     """
