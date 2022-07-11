@@ -1,95 +1,49 @@
 #!/usr/bin/python3
-"""Square Module:
-Inherited from rectangle module
-"""
-
-from models.base import Base
+'''Module for Square class.'''
 from models.rectangle import Rectangle
 
 
 class Square(Rectangle):
-    """Class describing a square.
-    Public instance methods:
-        - area()
-        - display()
-        - to_dictionary()
-        - update()
-    Inherits from Rectangle.
-    """
+    '''A Square class.'''
 
     def __init__(self, size, x=0, y=0, id=None):
-        """Initializes a Square instance.
-
-        Args:
-            - __size: size
-            - __x: position
-            - __y: position
-            - id: id
-        """
-
-        self.size = size
+        '''Constructor.'''
         super().__init__(size, size, x, y, id)
 
     def __str__(self):
-        """Returns a string representation of a Square instance."""
-
-        s = "[Square] ({}) {}/{} - {}".format(
-            self.id, self.x, self.y, self.__width)
-        return s
+        '''Returns string info about this square.'''
+        return '[{}] ({}) {}/{} - {}'.\
+            format(type(self).__name__, self.id, self.x, self.y, self.width)
 
     @property
     def size(self):
-        """Retrieves the size attribute."""
-
-        return self.__width
+        '''Size of this square.'''
+        return self.width
 
     @size.setter
     def size(self, value):
-        """Sets the size attribute."""
+        self.width = value
+        self.height = value
 
-        if type(value) is not int:
-            raise TypeError("width must be an integer")
-        if value <= 0:
-            raise ValueError("width must be > 0")
-        self.__width = value
-        self.__height = value
+    def __update(self, id=None, size=None, x=None, y=None):
+        '''Internal method that updates instance attributes via */**args.'''
+        if id is not None:
+            self.id = id
+        if size is not None:
+            self.size = size
+        if x is not None:
+            self.x = x
+        if y is not None:
+            self.y = y
 
     def update(self, *args, **kwargs):
-        """Updates attributes of an instance.
-
-        Args:
-            - id attribute
-            - size attribute
-            - x attribute
-            - y attribute
-        """
-
-        if args is not None and len(args) != 0:
-            if len(args) >= 1:
-                if type(args[0]) != int and args[0] is not None:
-                    raise TypeError("id must be an integer")
-                self.id = args[0]
-            if len(args) > 1:
-                self.size = args[1]
-            if len(args) > 2:
-                self.x = args[2]
-            if len(args) > 3:
-                self.y = args[3]
-        else:
-            for key, value in kwargs.items():
-                if key == "id":
-                    if type(value) != int and value is not None:
-                        raise TypeError("id must be an integer")
-                    self.id = value
-                if key == "size":
-                    self.size = value
-                if key == "x":
-                    self.x = value
-                if key == "y":
-                    self.y = value
+        '''Updates instance attributes via no-keyword & keyword args.'''
+        if args:
+            self.__update(*args)
+        elif kwargs:
+            self.__update(**kwargs)
 
     def to_dictionary(self):
-        """Returns the dictionary representation of a Square."""
-
-        my_dict = {'id': self.id, 'size': self.size, 'x': self.x, 'y': self.y}
-        return my_dict
+        '''Returns dictionary representation of this class.'''
+        return {"id": self.id, "size": self.width,
+                "x": self.x, "y": self.y}
